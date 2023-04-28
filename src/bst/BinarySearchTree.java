@@ -215,10 +215,20 @@ public class BinarySearchTree<T extends Comparable<T>> {
 	public void postOrderStack() {
 		Stack<BSTNode<T>> post = new Stack<>();
 		Stack<BSTNode<T>> postHelper = new Stack<>();
+		BSTNode<T> curr = root;
 		if(root!=null) {
 			postHelper.push(root);
 			while(!postHelper.isEmpty()) {
 				//how should post and postHelper be updated?
+				post.push(postHelper.pop());
+				if (curr.leftChild != null) {
+					postHelper.push(curr.leftChild);
+				}
+				if (curr.rightChild != null) {
+					postHelper.push(curr.rightChild);
+				}
+				curr = postHelper.peek();
+				
 			}
 			
 			while(!post.isEmpty()) {
